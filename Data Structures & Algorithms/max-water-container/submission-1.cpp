@@ -4,12 +4,14 @@ public:
         
         int left = 0;
         int right = heights.size()-1;
+
         int res = 0;
 
+        while(left <= right) {
+            int minHeight = min(heights[left], heights[right]);
+            int dist = right - left;
 
-        while(left < right) {
-            int volume = (right-left) * min(heights[left], heights[right]);
-            res = max(volume, res);
+            res = max((minHeight * dist), res);
 
             if(heights[left] < heights[right]) {
                 left++;
@@ -17,14 +19,18 @@ public:
                 right--;
             }
         }
+
         return res;
+
     }
 };
 
 
 /*
 
-2 ptr 
-calc volume and then move ptr which has lowest num 
+two pointers
+compute max area (distance) * smallest right/left
+
+move the smaller pointer until we cross
 
 */
